@@ -1,6 +1,7 @@
 package fc572.config;
 
 import lombok.Data;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -16,6 +17,8 @@ public class AppiumConfig {
     private String appPackage;
     private String appActivity;
     private String automationName;
+    private String browserName;
+    private String pathToDriver;
 
     private AppiumConfig() {
         try {
@@ -26,6 +29,8 @@ public class AppiumConfig {
             this.appPackage = props.getProperty("app.package");
             this.appActivity = props.getProperty("app.activity");
             this.automationName = props.getProperty("automation.name", "UiAutomator2");
+            this.browserName = props.getProperty("browser", "Chrome");
+            this.pathToDriver = props.getProperty("path.to.driver", "/.cache/appium/chromedriver");
         } catch (IOException e) {
             throw new RuntimeException("Failed to load appium.properties", e);
         }

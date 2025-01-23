@@ -1,5 +1,6 @@
 package fc572.driver;
 
+import fc572.config.AppiumConfig;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -14,20 +15,20 @@ public class AppiumDriverManager {
     private static ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
 
     public static void initializeDriver() {
-//        AppiumConfig config = AppiumConfig.getInstance();
+        AppiumConfig appiumConfig = AppiumConfig.getInstance();
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-dev-shm-usage");
 
         UiAutomator2Options options = new UiAutomator2Options()
-                .setDeviceName("emulator-5554")
-                .setAutomationName("UiAutomator2")
-                .setPlatformName("Android")
-                .withBrowserName("Chrome")
+                .setDeviceName(appiumConfig.getDeviceName())
+                .setAutomationName(appiumConfig.getAutomationName())
+                .setPlatformName(appiumConfig.getPlatformName())
+                .withBrowserName(appiumConfig.getBrowserName())
                 .setNoReset(true)
                 .setAutoGrantPermissions(true)
-                .setChromedriverExecutable(System.getProperty("user.home") + "/.cache/appium/chromedriver");
+                .setChromedriverExecutable(System.getProperty("user.home") + appiumConfig.getPathToDriver());
 
         // Merge Chrome options
         options.setCapability(ChromeOptions.CAPABILITY, chromeOptions);

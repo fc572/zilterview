@@ -1,13 +1,14 @@
-Feature: User Authentication
+Feature: Login Functionality
   As a user
   I want to be able to authenticate
   So that I can access my account
 
-  Scenario: Successful login with valid credentials
+  Scenario Outline: Successful login across <platform>
     Given I am on the login page
-    When I enter username "Neo" and password "redpill"
-    Then I should be redirected to the dashboard
+    When I enter username "<username>" and password "<password>"
+    Then I should be redirected to the matrix page
 
-  Scenario: Failed login with invalid credentials
-    Given I am on the login page
-    When I enter username "invalid" and password "wrongpass"
+    Examples:
+      | platform | username | password |
+      | Mobile   | Neo      | redpill  |
+      | Desktop  | Neo      | redpill  |
