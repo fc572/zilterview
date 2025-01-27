@@ -2,15 +2,15 @@ package fc572.api;
 
 import fc572.config.Configuration;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FakeApiTest {
+public class FakeApiTests {
     private static FakeApi todoApi;
 
-    @BeforeAll
+    @BeforeTest
     static void setup() {
         todoApi = new FakeApi(Configuration.getBaseUrl());
     }
